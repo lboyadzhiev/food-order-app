@@ -3,7 +3,10 @@ import React from 'react';
 // styles
 import classes from './MealItem.module.css';
 
-const MealItem = ({ name, description, price }) => {
+// components
+import MealItemForm from './MealItemForm';
+
+const MealItem = ({ id, name, description, price }) => {
   price = `$ ${price.toFixed(2)}`;
   return (
     <li className={classes.meal}>
@@ -12,7 +15,9 @@ const MealItem = ({ name, description, price }) => {
         <div className={classes.description}>{description}</div>
         <div className={classes.price}>{price}</div>
       </div>
-      <div></div>
+      <div>
+        <MealItemForm id={id} />
+      </div>
     </li>
   );
 };

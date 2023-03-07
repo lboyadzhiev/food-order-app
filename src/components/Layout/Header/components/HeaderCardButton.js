@@ -1,7 +1,7 @@
 import React from 'react';
 
 // icon
-import CartIcon from '../../../Card/CartIcon';
+import CartIcon from '../../../Cart/CartIcon';
 
 // styles
 import classes from './HeaderCardButton.module.css';
