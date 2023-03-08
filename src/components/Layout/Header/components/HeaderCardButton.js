@@ -12,13 +12,17 @@ import classes from './HeaderCardButton.module.css';
 const HeaderCardButton = () => {
   const cartCtx = useContext(CartContext);
 
+  const cartItems = cartCtx.items.reduce((currNum, item) => {
+    return currNum + item.amount;
+  }, 0);
+
   return (
     <button onClick={cartCtx.onShowCart} className={classes.button}>
       <span className={classes.icon}>
         <CartIcon />
       </span>
       <span>Your Card</span>
-      <span className={classes.badge}>3</span>
+      <span className={classes.badge}>{cartItems}</span>
     </button>
   );
 };

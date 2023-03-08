@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const CartContext = React.createContext({
   isCartShown: false,
@@ -9,7 +9,5 @@ const CartContext = React.createContext({
   onShowCart: () => {},
   onHideCart: () => {},
 });
-
-
 
 export default CartContext;
