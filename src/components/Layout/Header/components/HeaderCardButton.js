@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 // icon
 import CartIcon from '../../../Cart/components/CartIcon';
@@ -11,13 +11,33 @@ import classes from './HeaderCardButton.module.css';
 
 const HeaderCardButton = () => {
   const cartCtx = useContext(CartContext);
+  const [bumpButton, setBumpButton] = useState(false);
 
-  const cartItems = cartCtx.items.reduce((currNum, item) => {
+  const btnClasses = `${classes.button} ${bumpButton ? classes.bump : ''} `;
+
+  const { items } = cartCtx;
+
+  const cartItems = items.reduce((currNum, item) => {
     return currNum + item.amount;
   }, 0);
 
+  useEffect(() => {
+    if (items.length === 0) {
+      return;
+    }
+    setBumpButton(true);
+
+    const timer = setTimeout(() => {
+      setBumpButton(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [items]);
+
   return (
-    <button onClick={cartCtx.onShowCart} className={classes.button}>
+    <button onClick={cartCtx.onShowCart} className={btnClasses}>
       <span className={classes.icon}>
         <CartIcon />
       </span>
