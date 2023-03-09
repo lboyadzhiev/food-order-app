@@ -8,6 +8,7 @@ import classes from './Cart.module.css';
 
 // components
 import Modal from '../UI/Modal';
+import CartItem from './components/CartItem';
 
 const Cart = () => {
   const cartCtx = useContext(CartContext);
@@ -15,10 +16,21 @@ const Cart = () => {
   const totalAmount = `${cartCtx.totalAmount?.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
+  const cartItemRemoveHandler = (id) => {};
+
+  const cartItemAdd = (item) => {};
+
   const cartItems = (
     <ul className={classes['cart-items']}>
       {cartCtx.items.map((item) => (
-        <li>{item.name}</li>
+        <CartItem
+          key={item.id}
+          name={item.name}
+          price={item.price}
+          amount={item.amount}
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
+          onAdd={cartItemAdd.bind(null, item)}
+        />
       ))}
     </ul>
   );

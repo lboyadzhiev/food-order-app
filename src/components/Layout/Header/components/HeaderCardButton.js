@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 // icon
-import CartIcon from '../../../Cart/CartIcon';
+import CartIcon from '../../../Cart/components/CartIcon';
 
 // store
 import CartContext from '../../../../store/cart-store/cart-context';
