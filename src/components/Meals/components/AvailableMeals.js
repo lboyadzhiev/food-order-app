@@ -3,6 +3,12 @@ import React, { useState, useEffect } from 'react';
 // styles
 import classes from './AvailableMeals.module.css';
 
+// services
+import { getMeals } from '../../../services/api';
+
+// utils
+import { modifyMeals } from '../utils/modifyMeals';
+
 // components
 import Card from '../../UI/Card';
 import MealItem from './MealItem/MealItem';
@@ -14,26 +20,10 @@ const AvailableMeals = () => {
 
   useEffect(() => {
     const fetchMeals = async () => {
-      const response = await fetch(
-        'https://test-66f91.firebaseio.com/meals.json',
-      );
+      const data = await getMeals();
 
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
+      const loadedMeals = modifyMeals(data);
 
-      const data = await response.json();
-
-      const loadedMeals = [];
-
-      for (const key in data) {
-        loadedMeals.push({
-          id: key,
-          name: data[key].name,
-          description: data[key].description,
-          price: data[key].price,
-        });
-      }
       setMeals(loadedMeals);
       setIsLoading(false);
     };
