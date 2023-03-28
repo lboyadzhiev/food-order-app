@@ -20,7 +20,9 @@ const AvailableMeals = () => {
 
   useEffect(() => {
     const fetchMeals = async () => {
-      const data = await getMeals();
+      const data = await getMeals(
+        'https://test-66f91.firebaseio.com/meals.json',
+      );
 
       const loadedMeals = modifyMeals(data);
 

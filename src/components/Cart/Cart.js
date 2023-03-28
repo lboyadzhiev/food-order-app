@@ -3,6 +3,8 @@ import React, { useContext, useState } from 'react';
 // store
 import CartContext from '../../store/cart-store/cart-context';
 
+// service
+import { createOrder } from '../../services/api';
 // styles
 import classes from './Cart.module.css';
 
@@ -26,8 +28,11 @@ const Cart = () => {
     setIsCheckout(true);
   };
 
-  const cancelHandler = () => {
-    setIsCheckout(false);
+  const onConfirmHandler = (data) => {
+    createOrder('https://test-66f91.firebaseio.com/orders.json', {
+      user: data,
+      orderedItems: cartCtx.items,
+    });
   };
 
   const cartItemAdd = (item) => {
@@ -69,7 +74,7 @@ const Cart = () => {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {isCheckedOut && <Checkout />}
+      {isCheckedOut && <Checkout onConfirm={onConfirmHandler} />}
       {!isCheckedOut && modalActions}
     </Modal>
   );

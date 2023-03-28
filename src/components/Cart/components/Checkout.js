@@ -9,7 +9,7 @@ import classes from './Checkout.module.css';
 const isEmpty = (value) => value.trim() === '';
 const isFiveChars = (value) => value.trim().length === 5;
 
-const Checkout = () => {
+const Checkout = ({ onConfirm }) => {
   const cartCtx = useContext(CartContext);
 
   const [formInputValidity, setFormInputValidity] = useState({
@@ -39,7 +39,7 @@ const Checkout = () => {
 
     setFormInputValidity({
       name: enteredNameIsValid,
-      streen: enteredStreetIsValid,
+      street: enteredStreetIsValid,
       city: enteredCityIsValid,
       postalCode: enteredPostalCodeIsValid,
     });
@@ -53,6 +53,13 @@ const Checkout = () => {
     if (!formIsValid) {
       return;
     }
+
+    onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalCode,
+    });
   };
 
   const nameInputStyles = `${classes.control} ${
